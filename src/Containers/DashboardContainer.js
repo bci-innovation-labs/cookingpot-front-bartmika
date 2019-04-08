@@ -4,9 +4,16 @@ import Dashboard from "../Components/Dashboard";
 
 
 class DashboardContainer extends Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            userEmail: localStorage.getItem("userEmail")
+        }
+    }
     render() {
+
         return (
-            <Dashboard />
+            <Dashboard state={this.state} />
         )
     }
 }
