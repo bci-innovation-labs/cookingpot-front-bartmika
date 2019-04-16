@@ -20,8 +20,22 @@ class LoginContainer extends Component {
         // would work. You will need to write an API
         // web-service and replace this code with making
         // API calls and validating.
-        if (this.state.email === "bart@mika.com") {
+        if (this.state.email === "b@m.com") {
             if (this.state.password === "123password") {
+
+                const userProfile = {
+                    firstName: "Bart",
+                    lastName: "Mika",
+                    email: "b@m.com"
+                }
+
+                // OPTION 1
+                localStorage.setItem("firstName", userProfile.firstName);
+                localStorage.setItem("lastName", userProfile.lastName);
+                localStorage.setItem("email", userProfile.email);
+
+                // OPTION 2
+                localStorage.setItem("user", JSON.stringify(userProfile));
                 this.setState({
                     loginStatus: true
                 })
