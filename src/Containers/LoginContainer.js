@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 import Login from "../Components/Login";
 
@@ -15,7 +16,21 @@ class LoginContainer extends Component {
         this.onClick = this.onClick.bind(this);
         this.onChange = this.onChange.bind(this);
     }
-    onClick() {
+    onClick(e) {
+       e.preventDefault();
+
+       axios.post("https://api.mikaponics.com/api/login", {
+           'email': this.state.email,
+           'password': this.state.password,
+       }).then( (successResult) => {
+           console.log(successResult); // For debugging purposes.
+       }).catch( (errorResult) => {
+           console.log(errorResult);
+       }).then( () => {
+           // Do nothing.
+       });
+
+       return;
         // This is a simple example of how authentication
         // would work. You will need to write an API
         // web-service and replace this code with making
