@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import LoginContainer from "./LoginContainer";
 import DashboardContainer from "./DashboardContainer";
 import RegisterContainer from "./RegisterContainer";
+import FoodSearchContainer from "./FoodSearchContainer";
+
 
 class AppContainer extends Component {
   render() {
@@ -12,6 +14,7 @@ class AppContainer extends Component {
            <Route path="/" exact component={LoginContainer} />
            <Route path="/dashboard" exact component={DashboardContainer} />
            <Route path="/register" exact component={RegisterContainer} />
+           <Route path="/food-search" exact component={FoodSearchContainer} />
        </Router>
     );
   }
