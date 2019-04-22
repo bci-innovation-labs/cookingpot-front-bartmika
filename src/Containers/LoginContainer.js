@@ -22,11 +22,39 @@ class LoginContainer extends Component {
        axios.post("https://api.mikaponics.com/api/login", {
            'email': this.state.email,
            'password': this.state.password,
-       }).then( (successResult) => {
+       }).then( (successResult) => { // WHEN SUCCESSFUL
            console.log(successResult); // For debugging purposes.
-       }).catch( (errorResult) => {
+
+           // // ES6
+           // const { data } = successResult;
+           // const { email, first_name, last_name } = data;
+
+           // ES5
+           const data = successResult.data;
+           const email = data.email;
+           const firstName = data.first_name;
+           const lastName = data.last_name;
+
+           // NOTE: The above lines are equivalent!
+
+           // Create our user profile object to save...
+           const userProfile = {
+               firstName: firstName,
+               lastName: lastName,
+               email: email
+           }
+
+           // Save to local storage.
+           localStorage.setItem("user", JSON.stringify(userProfile));
+
+           // UPDATE STATE SO THE "render()" FUNCTION GETS CALLED
+           // AND THEN THE REDIRECT WILL OCCURE.
+           this.setState({
+               loginStatus: true
+           })
+       }).catch( (errorResult) => { // WHEN ERROR OCURRED
            console.log(errorResult);
-       }).then( () => {
+       }).then( () => { // ALWAYS THIS RUNS
            // Do nothing.
        });
 
@@ -64,9 +92,14 @@ class LoginContainer extends Component {
     }
     render() {
         const { loginStatus } = this.state;
+
+        // HERE IS WHERE WE WILL DO A RE-DIRECT TO THE DASHBOARD ONCE
+        // THE LOGIN WAS SUCCESSFUL.
         if (loginStatus === true) {
             return <Redirect to="/dashboard" />
         }
+
+        // IF THE LOGIN WAS NOT SUCCESSFUL THEN WE RENDER THIS CODE BELOW.
         return (
             <Login
                onClick={this.onClick}

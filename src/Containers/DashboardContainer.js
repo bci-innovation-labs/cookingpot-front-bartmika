@@ -23,7 +23,6 @@ class DashboardContainer extends Component {
         }
     }
     render() {
-
         return (
             <Dashboard
                 firstName={this.state.userProfile.firstName}
