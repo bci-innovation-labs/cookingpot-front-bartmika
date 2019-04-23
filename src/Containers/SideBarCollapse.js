@@ -6,6 +6,9 @@ const menuData = [
     {
         title: "Dashboad",
         url: "/dashboard"
+    },{
+        title: "Logout",
+        url: "/logout"
     },
   ]
 
