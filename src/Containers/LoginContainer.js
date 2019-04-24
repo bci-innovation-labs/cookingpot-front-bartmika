@@ -72,12 +72,6 @@ class LoginContainer extends Component {
                     email: "b@m.com"
                 }
 
-                // OPTION 1
-                localStorage.setItem("firstName", userProfile.firstName);
-                localStorage.setItem("lastName", userProfile.lastName);
-                localStorage.setItem("email", userProfile.email);
-
-                // OPTION 2
                 localStorage.setItem("user", JSON.stringify(userProfile));
                 this.setState({
                     loginStatus: true

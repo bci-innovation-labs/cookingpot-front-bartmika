@@ -2,7 +2,17 @@ import React from 'react'
 import { Link, NavLink } from "react-router-dom";
 import { Scrollbars } from 'react-custom-scrollbars';
 
-const menuData = [
+const anonMenuData = [
+    {
+        title: "Login",
+        url: "/login"
+    },{
+        title: "Register",
+        url: "/register"
+    },
+]
+
+const authMenuData = [
     {
         title: "Dashboad",
         url: "/dashboard"
@@ -10,7 +20,7 @@ const menuData = [
         title: "Logout",
         url: "/logout"
     },
-  ]
+]
 
 class ItemNode extends React.Component {
     constructor(props)
@@ -72,33 +82,51 @@ class SideBarCollapse extends React.Component {
     }
 
   render() {
-    return (
-    <div>
-        <header className="top-navbar navbar navbar-dark fixed-top bg-dark justify-content-between">
-            <Link className="navbar-brand" to="#">Cookingpot</Link>
-            <ul className="navbar-nav flex-row">
-                <li className="nav-item">
-                <button className={`navbar-toggler ${ this.state.active ? "active" : ""}` } type="button" id="sidebarCollapse"
-                    onClick = { this.sideMenuToggle }>
-                    <i className="fa fa-bars"></i>
-                </button>
-                </li>
-            </ul>
-        </header>
-        <nav id="sidebar" className={ `${ this.state.active ? "active" : ""}` }>
-            <div className="sideMenuTouchGlass"
-                onClick={ this.sideMenuToggle }
-                style={{ display: this.state.active ? "block" : "none"}}></div>
-            <Scrollbars>
-                <p className="text-center text-light mt-3 mb-2">Hi, Rodolfo</p>
-                    <hr className="nav-divider" />
-                    <ul className="nav flex-column">
-                        { menuData.map((item, index)=>(<ItemNode menuData={item} key={index} sideMenuToggle={this.sideMenuToggle}></ItemNode>)) }
-                    </ul>
-                </Scrollbars>
-        </nav>
-    </div>
-    )
+      // These are the variables that determine how the menu gets rendered.
+      let menuTitle;
+      let menuData;
+
+      // These are the local storage variables used in our system.
+      let userProfileString = localStorage.getItem('user');
+      var userProfileDictionary = JSON.parse(userProfileString);
+
+      // Set our variables.
+      if (userProfileDictionary === null || userProfileDictionary === undefined) {
+          menuTitle = "Cooking Pot";
+          menuData = anonMenuData;
+      } else {
+          menuTitle = "Hi, " + userProfileDictionary.firstName;
+          menuData = authMenuData;
+      }
+
+      // Render out menu.
+      return (
+          <div>
+              <header className="top-navbar navbar navbar-dark fixed-top bg-dark justify-content-between">
+                  <Link className="navbar-brand" to="#">Cookingpot</Link>
+                  <ul className="navbar-nav flex-row">
+                      <li className="nav-item">
+                      <button className={`navbar-toggler ${ this.state.active ? "active" : ""}` } type="button" id="sidebarCollapse"
+                          onClick = { this.sideMenuToggle }>
+                          <i className="fa fa-bars"></i>
+                      </button>
+                      </li>
+                  </ul>
+              </header>
+              <nav id="sidebar" className={ `${ this.state.active ? "active" : ""}` }>
+                  <div className="sideMenuTouchGlass"
+                      onClick={ this.sideMenuToggle }
+                      style={{ display: this.state.active ? "block" : "none"}}></div>
+                  <Scrollbars>
+                      <p className="text-center text-light mt-3 mb-2">{menuTitle}</p>
+                          <hr className="nav-divider" />
+                          <ul className="nav flex-column">
+                              { menuData.map((item, index)=>(<ItemNode menuData={item} key={index} sideMenuToggle={this.sideMenuToggle}></ItemNode>)) }
+                          </ul>
+                      </Scrollbars>
+              </nav>
+          </div>
+      );
   }
 }
 export default SideBarCollapse
