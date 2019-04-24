@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Dashboard from "../Components/Dashboard";
+import { getFoodRecipes } from "../API/FoodRecipeAPI";
 
 
 class DashboardContainer extends Component {
@@ -11,23 +12,34 @@ class DashboardContainer extends Component {
         let userProfileString = localStorage.getItem('user');
         var userProfileDictionary = JSON.parse(userProfileString);
 
-        console.log(userProfileString)
         this.state={
-            // OPTION 1
-            firstName: localStorage.getItem("firstName"),
-            lastName: localStorage.getItem("lastName"),
-            email: localStorage.getItem("email"),
-
-            // OPTION 2
-            userProfile: userProfileDictionary
+            userProfile: userProfileDictionary,
+            foodRecipesData: [],
         }
     }
+
+    componentDidMount() {
+        getFoodRecipes(
+            null,
+            {},
+            (data) => {
+                this.setState({
+                    foodRecipesData: data
+                });
+            },
+            (error) => {
+                // Do nothing, but this is where error handling happens.
+            }
+        )
+    }
+
     render() {
         return (
             <Dashboard
                 firstName={this.state.userProfile.firstName}
                 lastName={this.state.userProfile.lastName}
                 email={this.state.userProfile.email}
+                data={this.state.foodRecipesData}
             />
         )
     }

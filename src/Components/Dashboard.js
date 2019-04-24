@@ -1,16 +1,37 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class Dashboard extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            firstName: this.props.firstName,
-            lastName: this.props.lastName,
-            email: this.props.email
-        }
-    }
+class FoodRecipeRows extends Component {
     render() {
+        const { data } = this.props;
+        let elements = [];
+
+        for (let i = 0; i < data.length; i++) {
+            let row = data[i];
+            elements.push(
+                <tr key={row.id}>
+                    <td>
+                         {row.pictureURL &&
+                             <img src={row.pictureURL} alt={row.name} height="42" width="42" />
+                         } 
+                    </td>
+                    <td>{row.name}</td>
+                    <td>{row.shortDescription}</td>
+                    <td>{row.score}/5</td>
+                    <td>
+                    View <i className="fa fa-chevron-right"></i>
+                    </td>
+                </tr>
+            )
+        }
+
+        return elements
+    }
+}
+
+class Dashboard extends Component {
+    render() {
+        const { data } = this.props;
         return (
             <div className="container-fluid">
                 <div className="d-flex align-items-stretch">
@@ -22,6 +43,7 @@ class Dashboard extends Component {
                                 <table className="table table-striped">
                                     <thead>
                                     <tr>
+                                        <th></th>
                                         <th>Name</th>
                                         <th>Description</th>
                                         <th>Score</th>
@@ -29,16 +51,7 @@ class Dashboard extends Component {
                                     </tr>
                                     </thead>
                                     <tbody>
-
-                                    <tr>
-                                        <td>Hamburger</td>
-                                        <td>The good old american Hamburger.</td>
-                                        <td>5/5</td>
-                                        <td>
-                                        View <i className="fa fa-chevron-right"></i>
-                                        </td>
-                                    </tr>
-
+                                       <FoodRecipeRows data={data} />
                                     </tbody>
                                 </table>
                             </div>
