@@ -33,12 +33,20 @@ class FoodRecipeRows extends Component {
 
 class Dashboard extends Component {
     render() {
-        const { data } = this.props;
+        const { data, searchTerm, onChange } = this.props;
         return (
             <div className="container-fluid">
                 <div className="d-flex align-items-stretch">
                     <main id="main" role="main">
                         <h1>Dashboard</h1>
+
+                        <form className="form-inline search-form ml-0 my-2 my-lg-0 float-right">
+                            <input name="searchTerm" onChange={onChange} className="form-control search-box mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+                            <button className="nav-link search-button" type="button">
+                                <i className="fas fa-search"></i>
+                            </button>
+                        </form>
+
                         <div className="col-sm-12 mx-auto mt-4 pt-4">
                             <h2>Top Weekly Menu</h2>
                             <div className="table-responsive">

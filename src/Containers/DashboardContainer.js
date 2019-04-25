@@ -15,12 +15,15 @@ class DashboardContainer extends Component {
         this.state={
             userProfile: userProfileDictionary,
             foodRecipesData: [],
+            searchTerm: null,
         }
+
+        this.onChange = this.onChange.bind(this);
     }
 
     componentDidMount() {
         getFoodRecipes(
-            null,
+            this.state.searchTerm,
             {},
             (data) => {
                 this.setState({
@@ -33,6 +36,13 @@ class DashboardContainer extends Component {
         )
     }
 
+    onChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value,
+        })
+        this.componentDidMount()
+    }
+
     render() {
         return (
             <Dashboard
@@ -40,6 +50,8 @@ class DashboardContainer extends Component {
                 lastName={this.state.userProfile.lastName}
                 email={this.state.userProfile.email}
                 data={this.state.foodRecipesData}
+                searchTerm={this.state.searchTerm}
+                onChange={this.onChange}
             />
         )
     }
