@@ -5,7 +5,8 @@ export const SAMPLE_DATA = [
         shortDescription: "Good old American hamburger.",
         longDescription: "sfsdfs f sdf sdf sdfs fdsdf sfsdfsf",
         pictureURL: null,
-        category: 'lunch'
+        category: 'lunch',
+        score: 5
     },{
         id: 2,
         name: "Pizza",
@@ -13,6 +14,7 @@ export const SAMPLE_DATA = [
         longDescription: "sfsdfs f sdf sdf sdfs fdsdf sfsdfsf dfd gg",
         pictureURL: null,
         category: 'dinner',
+        score: 4,
     },{
         id: 3,
         name: "Eggs and Bacon",
@@ -20,6 +22,7 @@ export const SAMPLE_DATA = [
         longDescription: "sfsdfs f sdf sdf sdfs fdsdf sfsdfsf dfd gg",
         pictureURL: null,
         category: 'breakfest',
+        score: 4
     },{
         id: 4,
         name: "BLT Sub Sandwich",
@@ -27,5 +30,6 @@ export const SAMPLE_DATA = [
         longDescription: "sfsdfs f sdf sdf sdfs fdsdf sfsdfsf dfd gg",
         pictureURL: null,
         category: 'lunch',
+        score: 3
     }
 ];

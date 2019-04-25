@@ -13,13 +13,15 @@ class FoodRecipeRows extends Component {
                     <td>
                          {row.pictureURL &&
                              <img src={row.pictureURL} alt={row.name} height="42" width="42" />
-                         } 
+                         }
                     </td>
                     <td>{row.name}</td>
                     <td>{row.shortDescription}</td>
                     <td>{row.score}/5</td>
                     <td>
-                    View <i className="fa fa-chevron-right"></i>
+                        <Link to={`/food/${row.id}`}>
+                            View <i className="fa fa-chevron-right"></i>
+                        </Link>
                     </td>
                 </tr>
             )
